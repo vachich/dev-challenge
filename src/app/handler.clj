@@ -13,5 +13,5 @@
   (-> app-routes
     (wrap-defaults api-defaults)
     wrap-json-response
-    wrap-json-body
+    (wrap-json-body {:keywords? true})
     ))
