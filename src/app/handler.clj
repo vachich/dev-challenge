@@ -3,7 +3,8 @@
     [compojure.core :refer :all]
     [ring.middleware.defaults :refer [api-defaults wrap-defaults]]
     [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-    [app.service :as service]))
+    [app.service :as service]
+    [app.middleware :refer [wrap-exceptions]]))
 
 (defroutes app-routes
   (POST "/" [] (fn [req] {:status 200 :body (service/compute (-> req :body)) :headers {"Content-Type" "application/json"}}))
@@ -11,6 +12,7 @@
 
 (def app-handler
   (-> app-routes
+    wrap-exceptions
     (wrap-defaults api-defaults)
     wrap-json-response
     (wrap-json-body {:keywords? true})
