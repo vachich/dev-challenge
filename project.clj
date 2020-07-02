@@ -10,7 +10,9 @@
                  [environ "1.2.0"]
                  [ring/ring-defaults "0.3.2"]]
   :plugins []
-  :main app.core
+  :uberjar-name "app.jar"
   :profiles
-  {:dev {:dependencies [[expectations/clojure-test "1.2.1"]
+  {:production {:env {:production true
+                      :port 80}}
+   :dev {:dependencies [[expectations/clojure-test "1.2.1"]
                         [clj-http "3.10.1"]]}})
