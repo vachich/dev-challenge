@@ -9,5 +9,10 @@
       (handler request)
       (catch Throwable e
         (if (:code (ex-data e))
-          {:status (ex-data e) :body {:error (ex-message e)} :headers {"Content-Type" "application/json"}}
-          {:status 500 :body {:error "Server Error"} :headers {"Content-Type" "application/json"}})))))
+          {:status (ex-data e) :body {:error (ex-message e)}}
+          {:status 500 :body {:error "Server Error"}})))))
+
+(defn wrap-content-type-json [handler]
+  "Middleware that adds `application/json` content-type headers to the request."
+  (fn [request]
+    (handler (assoc-in request [:headers] {"Content-Type" "application/json"}))))
