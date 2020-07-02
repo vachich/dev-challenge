@@ -12,4 +12,4 @@
   :plugins []
   :main app.core
   :profiles
-  {:dev {:dependencies []}})
+  {:dev {:dependencies [[expectations/clojure-test "1.2.1"]]}})
