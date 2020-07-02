@@ -12,4 +12,5 @@
   :plugins []
   :main app.core
   :profiles
-  {:dev {:dependencies [[expectations/clojure-test "1.2.1"]]}})
+  {:dev {:dependencies [[expectations/clojure-test "1.2.1"]
+                        [clj-http "3.10.1"]]}})
