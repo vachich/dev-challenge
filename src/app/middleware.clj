@@ -9,7 +9,7 @@
       (handler request)
       (catch Throwable e
         (if (:code (ex-data e))
-          {:status (ex-data e) :body {:error (ex-message e)}}
+          {:status (:code (ex-data e)) :body {:error (ex-message e)}}
           {:status 500 :body {:error "Server Error"}})))))
 
 (defn wrap-content-type-json [handler]
