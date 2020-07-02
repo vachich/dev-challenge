@@ -14,5 +14,4 @@
     wrap-content-type-json
     wrap-exceptions
     wrap-json-response
-    (wrap-json-body {:keywords? true})
-    ))
+    (wrap-json-body {:keywords? true})))

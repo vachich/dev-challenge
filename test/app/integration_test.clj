@@ -22,13 +22,13 @@
       (expect "{\"result\":8}" (:body response))
       (expect 200 (:status response))))
 
-(expecting "422 Status code and Invalid input error message when all values are not positive int or zero"
-  (let [response (try (post url {:content-type :json
-                                 :body         "{\n\"address\": {\n\"colorKeys\": [\n\"A\",\n\"G\",\n\"Z\"\n],\n\"values\": [\n74,\n117,\n-115,\n116,\n79,\n110\n]\n},\n\"meta\": {\n\"digits\": 33,\n\"processingPattern\": \"d{5}+[a-z&$§]\"\n}\n}"})
-                      (catch ExceptionInfo e
-                        (ex-data e)))]
-    (expect 422 (:status response))
-    (expect "{\"error\":\"Invalid input, expected values to be positive int or zero.\"}" (:body response))))
+  (expecting "422 Status code and Invalid input error message when all values are not positive int or zero"
+    (let [response (try (post url {:content-type :json
+                                   :body         "{\n\"address\": {\n\"colorKeys\": [\n\"A\",\n\"G\",\n\"Z\"\n],\n\"values\": [\n74,\n117,\n-115,\n116,\n79,\n110\n]\n},\n\"meta\": {\n\"digits\": 33,\n\"processingPattern\": \"d{5}+[a-z&$§]\"\n}\n}"})
+                        (catch ExceptionInfo e
+                          (ex-data e)))]
+      (expect 422 (:status response))
+      (expect "{\"error\":\"Invalid input, expected values to be positive int or zero.\"}" (:body response))))
 
   (expecting "422 Status code and error json message when missing values"
     (let [response (try (post url {:content-type :json
