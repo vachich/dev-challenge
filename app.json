@@ -1,0 +1,6 @@
+{
+  "name": "app",
+  "description": "A clojure app.",
+  "image": "heroku/clojure",
+  "addons": [ "heroku-postgresql" ]
+}
