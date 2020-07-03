@@ -7,15 +7,19 @@
 (deftest compute-test
   (expecting "throws ExceptionInfo if invalid input"
     (expect ExceptionInfo (service/compute {}))
-    (expect ExceptionInfo (service/compute {:address {:values [11 -11]}})))
+    (expect ExceptionInfo (service/compute {:address {:values [11 -11]}}))
+    (expect ExceptionInfo (service/compute {:address {:values []}})))
   (expecting "returns a map with correct computation"
-    (expect {:result 4} (service/compute {:address {:values [11 11]}}))))
+    (expect {:result 4} (service/compute {:address {:values [11 11]}})))
+  (expecting "success even with a big number"
+    (expect {:result 75} (service/compute {:address {:values [2312312312312131231 1231231231232312321]}}))))
 
 (deftest check-valid-values-test
   (expecting "throws ExceptionInfo if invalid"
     (expect ExceptionInfo (#'service/check-valid-values [11 -11]))
     (expect ExceptionInfo (#'service/check-valid-values [1 11.0]))
-    (expect ExceptionInfo (#'service/check-valid-values [1 "1"])))
+    (expect ExceptionInfo (#'service/check-valid-values [1 "1"]))
+    (expect ExceptionInfo (#'service/check-valid-values [])))
   (expecting "returns nil if valid"
     (expect nil (#'service/check-valid-values [11 11]))))
 

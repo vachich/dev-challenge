@@ -1,12 +1,15 @@
 (ns app.service)
 
 (defn- pos-int-or-zero? [x]
-  (or (pos-int? x) (= x 0)))
+  (and (number? x)
+    (or (pos-int? x) (zero? x))))
 
 (defn- check-valid-values [values]
-  "Throws ExceptionInfo if values are not positive integer or zero."
-  (when-not (every? pos-int-or-zero? values)
-    (throw (ex-info "Invalid input, expected values to be positive int or zero." {:code 422}))))
+  "Throws ExceptionInfo if values vector is empty or vector elements are not positive integer or zero."
+  (if (seq values)
+    (when-not (every? pos-int-or-zero? values)
+      (throw (ex-info "Invalid input, expected values vector elements to be positive int or zero." {:code 422})))
+    (throw (ex-info "Values vector is empty." {:code 422}))))
 
 (defn- number->digits [x]
   "Given a number, it returns a vector of digits.
