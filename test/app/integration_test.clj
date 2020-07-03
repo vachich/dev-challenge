@@ -28,7 +28,7 @@
                         (catch ExceptionInfo e
                           (ex-data e)))]
       (expect 422 (:status response))
-      (expect "{\"error\":\"Invalid input, expected values to be positive int or zero.\"}" (:body response))))
+      (expect "{\"error\":\"Invalid input, expected values vector elements to be positive int or zero.\"}" (:body response))))
 
   (expecting "422 Status code and error json message when missing values"
     (let [response (try (post url {:content-type :json
