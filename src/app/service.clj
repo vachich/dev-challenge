@@ -1,7 +1,7 @@
 (ns app.service)
 
 (defn- pos-int-or-zero? [x]
-  (or (pos-int? x) (= x 0)))
+  (or (pos-int? x) (zero? x)))
 
 (defn- check-valid-values [values]
   "Throws ExceptionInfo if values vector is empty or vector elements are not positive integer or zero."
